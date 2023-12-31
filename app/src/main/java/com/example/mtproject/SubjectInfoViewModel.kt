@@ -1,67 +1,36 @@
 package com.example.mtproject
 
-import android.content.Intent
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mtproject.domain.SubjectInfoDomain
+import com.example.mtproject.model.Patch
+import com.example.mtproject.model.Patches
+import com.example.mtproject.retrofit.RetrofitApi
+import com.example.mtproject.retrofit.RetrofitInstance
+//import com.example.mtproject.source.ManualParsingImpl
+import com.example.mtproject.source.Repository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
-class SubjectInfoViewModel(
-    private val repository: Repository
-) : ViewModel() {
+class SubjectInfoViewModel : ViewModel()
+{
+    //private val repository = Repository(ManualParsingImpl())
+    private val repository = Repository(RetrofitInstance.service)
 
-    private val _subjectInfoValue = MutableLiveData<SubjectInfoDomain>()
-    val subjectInfoValue: LiveData<SubjectInfoDomain> = _subjectInfoValue
+    val patchLiveData = MutableLiveData<Patch>()
 
-    val showHint = MutableLiveData<Boolean>()
-    val showNotFound = MutableLiveData<Boolean>()
-    val showProgressBar = MutableLiveData<Boolean>()
-    val zkratkaMutable = MutableLiveData<String?>()
+    fun fetchPatchesFromRepository() {
 
-    val processToDetail = MutableLiveData<Boolean>()
-
-
-
-    fun getSubjectInfo(katedra: String, zkratka: String){
         viewModelScope.launch {
-            try {
 
-                _subjectInfoValue.value = repository.getSubjectInfo(katedra, zkratka).firstOrNull()
-                showProgressBar.value = false
-            } catch (e: Exception) {
-                Log.v("MYAPP", "Not found: " + e.message)
-
-                // show not found message
-                showNotFound.value = true
-                showProgressBar.value = false
+            val patch = withContext(Dispatchers.IO) {
+                repository.getPatches()[0];
             }
+            patchLiveData.value=patch
         }
+
     }
 
-    fun search () {
-        if (zkratkaMutable.value != null && !zkratkaMutable.value!!.isEmpty()) {
-            // zkratka was provided by the user
-            showProgressBar.value = true
-            getSubjectInfo("AUIUI", zkratkaMutable.value!!)
-
-        } else {
-            // zkratka was not provided, show hint text view
-            showHint.value = true
-        }
-    }
-
-    fun toDetail () {
-        processToDetail.value = true
-    }
-
-    fun hideHintAndNotFound () {
-        showHint.value = false
-        showNotFound.value = false
-    }
 }
