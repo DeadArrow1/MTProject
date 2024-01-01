@@ -1,5 +1,6 @@
 package com.example.mtproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -33,7 +34,20 @@ class SubjectInfoActivity : AppCompatActivity() {
 //            Glide.with(this).load(it.image).into(binding.imageView)
 
             //val arrayAdapter: ArrayAdapter<Patch> = ArrayAdapter(applicationContext,android.R.layout.simple_list_item_1,it)
+            binding.CustomListView.isClickable = true
             binding.CustomListView.adapter=CustomAdapter(this,it)
+            binding.CustomListView.setOnItemClickListener{parent, view,position,id ->
+                val name = it[position].name
+                val image = it[position].image
+                val description = it[position].description
+
+                val i = Intent(this,PatchActivity::class.java)
+                i.putExtra("name",name)
+                i.putExtra("image",image)
+                i.putExtra("description",description)
+                startActivity(i)
+
+            }
 
 
         }
