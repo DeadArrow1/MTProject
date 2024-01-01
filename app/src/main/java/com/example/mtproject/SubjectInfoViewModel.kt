@@ -19,16 +19,15 @@ class SubjectInfoViewModel : ViewModel()
     //private val repository = Repository(ManualParsingImpl())
     private val repository = Repository(RetrofitInstance.service)
 
-    val patchLiveData = MutableLiveData<Patch>()
-
+    val patchLiveData = MutableLiveData<Patches>()
     fun fetchPatchesFromRepository() {
 
         viewModelScope.launch {
 
-            val patch = withContext(Dispatchers.IO) {
-                repository.getPatches()[0];
+            val patches = withContext(Dispatchers.IO) {
+                repository.getPatches();
             }
-            patchLiveData.value=patch
+            patchLiveData.value=patches
         }
 
     }
