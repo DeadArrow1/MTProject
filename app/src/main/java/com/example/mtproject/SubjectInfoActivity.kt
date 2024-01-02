@@ -40,11 +40,16 @@ class SubjectInfoActivity : AppCompatActivity() {
                 val name = it[position].name
                 val image = it[position].image
                 val description = it[position].description
+                val rarityName = it[position].rarity.name
+                val rarityColor = it[position].rarity.color
+
 
                 val i = Intent(this,PatchActivity::class.java)
                 i.putExtra("name",name)
                 i.putExtra("image",image)
                 i.putExtra("description",description)
+                i.putExtra("rarityName",rarityName)
+                i.putExtra("rarityColor",rarityColor)
                 startActivity(i)
 
             }

@@ -4,9 +4,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
-    val builder = Retrofit.Builder().baseUrl("https://bymykel.github.io")
+    private val builder: Retrofit = Retrofit.Builder().baseUrl("https://bymykel.github.io")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    val service = builder.create(RetrofitApi::class.java)
+    val service: RetrofitApi = builder.create(RetrofitApi::class.java)
 }
