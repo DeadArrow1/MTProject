@@ -1,14 +1,12 @@
 package com.example.mtproject
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
 import com.example.mtproject.databinding.ActivitySubjectinfoBinding
 import com.example.mtproject.model.CustomAdapter
-import com.example.mtproject.model.Patch
+
 
 class SubjectInfoActivity : AppCompatActivity() {
 
@@ -17,12 +15,10 @@ class SubjectInfoActivity : AppCompatActivity() {
 
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySubjectinfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
 
         viewModel = ViewModelProvider(this)[SubjectInfoViewModel::class.java]

@@ -13,16 +13,20 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
             android:orientation="horizontal">
+            <FrameLayout
+                android:id="@+id/PatchImageBackground"
+                android:layout_width="100dp"
+                android:layout_height="100dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/image"
-                android:layout_height="80dp"
-                android:layout_width="80dp"
-                android:layout_marginStart="20dp"
-                >
-
-            </de.hdodenhof.circleimageview.CircleImageView>
-
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image"
+                    android:layout_height="80dp"
+                    android:layout_width="80dp"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    >
+                </de.hdodenhof.circleimageview.CircleImageView>
+            </FrameLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

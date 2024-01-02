@@ -5,4 +5,5 @@
     <string name="txtSubjectShorcut_hint">Musíte poskytnou zkratku předmětu</string>
     <string name="subjectInfo_not_found">Předmět s touto zkratkou nebyl nalezen.</string>
     <string name="btn_more_text">More info...</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
 </resources>
