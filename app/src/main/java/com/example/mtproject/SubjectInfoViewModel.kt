@@ -1,34 +1,45 @@
 package com.example.mtproject
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mtproject.model.Patch
+import com.example.mtproject.Domain.PatchDomain
 import com.example.mtproject.model.Patches
-import com.example.mtproject.retrofit.RetrofitApi
-import com.example.mtproject.retrofit.RetrofitInstance
-//import com.example.mtproject.source.ManualParsingImpl
 import com.example.mtproject.source.Repository
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
-class SubjectInfoViewModel : ViewModel()
+
+class SubjectInfoViewModel (private val repository: Repository) : ViewModel()
 {
-    //private val repository = Repository(ManualParsingImpl())
-    private val repository = Repository(RetrofitInstance.service)
+    private val _patchValue = MutableLiveData<PatchDomain>()
+    val patchValue: LiveData<PatchDomain> = _patchValue
 
-    val patchLiveData = MutableLiveData<Patches>()
+
     fun fetchPatchesFromRepository() {
 
         viewModelScope.launch {
+            try {
 
-            val patches = withContext(Dispatchers.IO) {
-                repository.getPatches();
+                _patchValue.value = repository.getPatchesFromRepository().firstOrNull()
+            } catch (e: Exception) {
+                Log.v("MYAPP", "Not found: " + e.message)
             }
-            patchLiveData.value=patches
         }
+
+
+
+
+//        viewModelScope.launch {
+//
+//            val patches = withContext(Dispatchers.IO) {
+//                repository.getPatches();
+//            }
+//            patchLiveData.value=patches
+//        }
 
     }
 

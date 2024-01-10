@@ -11,11 +11,12 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.example.mtproject.Domain.PatchDomain
 import com.example.mtproject.R
 import com.example.mtproject.SubjectInfoActivity
 import com.example.mtproject.databinding.ActivitySubjectinfoBinding
 
-class CustomAdapter (private val context: Activity,private val arrayList: ArrayList<Patch>) : ArrayAdapter<Patch>(context,
+class CustomAdapter (private val context: Activity,private val arrayList: ArrayList<PatchDomain>) : ArrayAdapter<PatchDomain>(context,
     R.layout.patch_layout,arrayList) {
 
 
@@ -38,7 +39,7 @@ class CustomAdapter (private val context: Activity,private val arrayList: ArrayL
 
         val gd = GradientDrawable(
             GradientDrawable.Orientation.TL_BR,
-            intArrayOf(android.R.color.background_dark, Color.parseColor(arrayList[position].rarity.color), Color.WHITE)
+            intArrayOf(android.R.color.background_dark, Color.parseColor(arrayList[position].rarityColor), Color.WHITE)
         )
         gd.gradientType = GradientDrawable.RADIAL_GRADIENT
         gd.gradientRadius = 180.0f
