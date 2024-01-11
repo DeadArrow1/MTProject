@@ -11,12 +11,11 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.example.mtproject.DB.RoomDB.PatchDTO
 import com.example.mtproject.Domain.PatchDomain
 import com.example.mtproject.R
-import com.example.mtproject.SubjectInfoActivity
-import com.example.mtproject.databinding.ActivitySubjectinfoBinding
 
-class CustomAdapter (private val context: Activity,private val arrayList: ArrayList<PatchDomain>) : ArrayAdapter<PatchDomain>(context,
+class CustomAdapter(private val context: Activity, private val arrayList: Array<PatchDTO>) : ArrayAdapter<PatchDTO>(context,
     R.layout.patch_layout,arrayList) {
 
 

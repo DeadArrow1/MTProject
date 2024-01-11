@@ -39,13 +39,13 @@ class SubjectInfoActivity : AppCompatActivity() {
 
 
 
-            binding.CustomListView.adapter=CustomAdapter(this, arrayListOf(it))
+            binding.CustomListView.adapter=CustomAdapter(this, it)
             binding.CustomListView.setOnItemClickListener{parent, view,position,id ->
-                val name = it.name
-                val image = it.image
-                val description = it.description
-                val rarityName = it.rarityName
-                val rarityColor = it.rarityColor
+                val name = it[position].name
+                val image = it[position].image
+                val description = it[position].description
+                val rarityName = it[position].rarityName
+                val rarityColor = it[position].rarityColor
 
 
                 val i = Intent(this,PatchActivity::class.java)

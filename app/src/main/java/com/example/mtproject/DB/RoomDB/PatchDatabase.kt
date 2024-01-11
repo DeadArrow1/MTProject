@@ -13,14 +13,14 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface PatchDao {
 
-    @Query("select * from PatchTable LIMIT 1")
-    fun getPatchesFromDatabase(): Flow<PatchDTO>
+    @Query("select * from PatchTable")
+    fun getPatchesFromDatabase(): Flow<Array<PatchDTO>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert( subject: PatchDTO)
 }
 
-@Database(entities = [PatchDTO::class], version = 2)
+@Database(entities = [PatchDTO::class], version = 5)
 abstract class MyRoomDatabase: RoomDatabase() {
     abstract val patchDao: PatchDao
 }
